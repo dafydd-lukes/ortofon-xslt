@@ -7,4 +7,10 @@ $(document).ready(function() {
             'left': $(this).scrollLeft()
         });
     });
+
+    // start playing sound at corresponding position when annotation is clicked
+    $(".annotation").click(function() {
+        document.getElementById("wav").currentTime = parseInt($(this).attr("start") / 1000);
+        document.getElementById("wav").play();
+    });
 });

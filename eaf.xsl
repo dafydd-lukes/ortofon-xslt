@@ -13,6 +13,12 @@
         <script src="js/eaf.js"></script>
       </head>
       <body>
+
+        <audio id="wav" preload="none" controls="true">
+          <source src="{./HEADER/MEDIA_DESCRIPTOR/@RELATIVE_MEDIA_URL}" type="audio/wav"/>
+          <p>Váš prohlížeč nepodporuje element &lt;audio/&gt;.</p>
+        </audio>
+
         <xsl:apply-templates select="TIER[
                                      @LINGUISTIC_TYPE_REF = 'ortografický' or
                                      @LINGUISTIC_TYPE_REF = 'meta' or
@@ -20,11 +26,6 @@
                                      ]">
           <xsl:sort select="./@TIER_ID"/>
         </xsl:apply-templates>
-
-        <audio id="wav" preload="none" controls="true">
-          <source src="{./HEADER/MEDIA_DESCRIPTOR/@RELATIVE_MEDIA_URL}" type="audio/wav"/>
-          <p>Váš prohlížeč nepodporuje element &lt;audio/&gt;.</p>
-        </audio>
 
       </body>
     </html>
@@ -44,11 +45,12 @@
     <xsl:variable name="id" select="./@ANNOTATION_ID"/>
     <xsl:variable name="end_ref" select="./@TIME_SLOT_REF2"/>
     <xsl:variable name="start" select="//TIME_SLOT[@TIME_SLOT_ID =
-                                       $start_ref]/@TIME_VALUE div $zoom"/>
-    <xsl:variable name="length" select="(//TIME_SLOT[@TIME_SLOT_ID =
-                                        $end_ref]/@TIME_VALUE div $zoom) - $start"/>
-    <div class="annotation" style="left: {$start}; width: {$length};"
-         id="{$id}">
+                                       $start_ref]/@TIME_VALUE"/>
+    <xsl:variable name="start_z" select="$start div $zoom"/>
+    <xsl:variable name="length_z" select="(//TIME_SLOT[@TIME_SLOT_ID =
+                                          $end_ref]/@TIME_VALUE div $zoom) - $start_z"/>
+    <div class="annotation" style="left: {$start_z}; width: {$length_z};"
+         id="{$id}" start="{$start}">
       <p>
         <xsl:value-of select="./ANNOTATION_VALUE"/>
       </p>
