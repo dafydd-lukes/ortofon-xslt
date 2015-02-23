@@ -19,11 +19,7 @@
           <p>Váš prohlížeč nepodporuje element &lt;audio/&gt;.</p>
         </audio>
 
-        <xsl:apply-templates select="TIER[
-                                     @LINGUISTIC_TYPE_REF = 'ortografický' or
-                                     @LINGUISTIC_TYPE_REF = 'meta' or
-                                     @LINGUISTIC_TYPE_REF = 'META'
-                                     ]">
+        <xsl:apply-templates select="TIER">
           <xsl:sort select="./@TIER_ID"/>
         </xsl:apply-templates>
 
@@ -32,12 +28,19 @@
   </xsl:template>
 
   <xsl:template match="TIER">
-    <div class="tier" id="{translate(./@TIER_ID, ' ', '')}">
-      <span class="label">
-        <xsl:value-of select="./@TIER_ID"/>
-      </span>
-      <xsl:apply-templates select="./ANNOTATION/ALIGNABLE_ANNOTATION"/>
-    </div>
+    <xsl:variable name="ling_type_ref" select="./@LINGUISTIC_TYPE_REF"/>
+    <xsl:variable name="time_alignable"
+                  select="//LINGUISTIC_TYPE[@LINGUISTIC_TYPE_ID =
+                  $ling_type_ref]/@TIME_ALIGNABLE"/>
+
+    <xsl:if test="$time_alignable = 'true'">
+      <div class="tier" id="{translate(./@TIER_ID, ' ', '')}">
+        <span class="label">
+          <xsl:value-of select="./@TIER_ID"/>
+        </span>
+        <xsl:apply-templates select="./ANNOTATION/ALIGNABLE_ANNOTATION"/>
+      </div>
+    </xsl:if>
   </xsl:template>
 
   <xsl:template match="ALIGNABLE_ANNOTATION">
@@ -49,6 +52,7 @@
     <xsl:variable name="start_z" select="$start div $zoom"/>
     <xsl:variable name="length_z" select="(//TIME_SLOT[@TIME_SLOT_ID =
                                           $end_ref]/@TIME_VALUE div $zoom) - $start_z"/>
+
     <div class="annotation" style="left: {round($start_z)}px;
                                    width: {round($length_z)}px;"
          id="{$id}" start="{$start}">
