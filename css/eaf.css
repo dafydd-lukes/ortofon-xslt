@@ -1,0 +1,27 @@
+div {
+    position: relative;
+    min-height: 100px;
+    border: 1px dashed red;
+    width: 100vw;
+}
+
+span.label {
+    position: absolute;
+    border: 1px dotted green;
+    top: 2px;
+    left: 2px;
+    /* height: 100px; */
+    width: 3em;
+    background-color: white;
+    z-index: 10000;
+}
+
+div.annotation {
+    border: 1px solid black;
+    position: absolute;
+}
+
+div.annotation:hover {
+    background-color: yellow;
+    cursor: pointer;
+}
