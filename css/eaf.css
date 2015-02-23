@@ -1,6 +1,10 @@
+body {
+    padding-top: 30px;
+}
+
 div {
     position: relative;
-    min-height: 100px;
+    height: 100px;
     border: 1px dashed red;
     width: 100vw;
 }
@@ -17,6 +21,7 @@ span.label {
 }
 
 div.annotation {
+    height: 98px;
     border: 1px solid black;
     position: absolute;
 }
@@ -30,4 +35,5 @@ audio {
     width: 100%;
     position: fixed;
     z-index: 20000;
+    top: 2px;
 }
