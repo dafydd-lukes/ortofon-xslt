@@ -49,7 +49,8 @@
     <xsl:variable name="start_z" select="$start div $zoom"/>
     <xsl:variable name="length_z" select="(//TIME_SLOT[@TIME_SLOT_ID =
                                           $end_ref]/@TIME_VALUE div $zoom) - $start_z"/>
-    <div class="annotation" style="left: {$start_z}; width: {$length_z};"
+    <div class="annotation" style="left: {round($start_z)}px;
+                                   width: {round($length_z)}px;"
          id="{$id}" start="{$start}">
       <p>
         <xsl:value-of select="./ANNOTATION_VALUE"/>
@@ -60,4 +61,5 @@
       </p>
     </div>
   </xsl:template>
+
 </xsl:stylesheet>
