@@ -16,7 +16,7 @@
 
         <audio id="wav" preload="none" controls="true">
           <source src="{./HEADER/MEDIA_DESCRIPTOR/@RELATIVE_MEDIA_URL}" type="audio/wav"/>
-          <p>Váš prohlížeč nepodporuje element &lt;audio/&gt;.</p>
+          <p>Your browser does not support the &lt;audio/&gt; tag.</p>
         </audio>
 
         <xsl:apply-templates select="TIER">
