@@ -21,9 +21,9 @@ annotations on their parent tier (`TIME_ALIGNABLE="true"`).
 2. Open the transcription in a text editor and add the following as the
 **second line from the top**:
 
-```xml
-<?xml-stylesheet type="text/xsl" href="eaf.xsl"?>
-```
+    ```xml
+    <?xml-stylesheet type="text/xsl" href="eaf.xsl"?>
+    ```
 
 3. Put the transcription in the same directory as the `eaf.xsl` stylesheet and
 its helper files reside.
